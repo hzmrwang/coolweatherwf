@@ -1,5 +1,6 @@
 package cn.tedu.coolweather;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -26,6 +27,7 @@ import java.io.IOException;
 
 import cn.tedu.coolweather.gson.Forecast;
 import cn.tedu.coolweather.gson.Weather;
+import cn.tedu.coolweather.service.AutoUpdateService;
 import cn.tedu.coolweather.util.HttpUtil;
 import cn.tedu.coolweather.util.Utilty;
 import okhttp3.Call;
@@ -193,6 +195,9 @@ public class WeatherActivity extends AppCompatActivity {
                             editor.putString("weather", responseText);
                             editor.apply();
                             showWeatherInfo(weather);
+
+                            Intent intent = new Intent(WeatherActivity.this, AutoUpdateService.class);
+                            startService(intent);
                         } else {
                             Toast.makeText(WeatherActivity.this, "获取天气信息失败", Toast.LENGTH_SHORT).show();
                         }
@@ -205,7 +210,7 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
     /**
-     * 处理并展示实体类中的数据
+     * 处理并展示Weather实体类中的数据
      *
      * @param weather
      */
