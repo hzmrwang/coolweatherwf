@@ -24,6 +24,8 @@ import com.bumptech.glide.Glide;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import cn.tedu.coolweather.gson.Forecast;
 import cn.tedu.coolweather.gson.Weather;
@@ -65,6 +67,8 @@ public class WeatherActivity extends AppCompatActivity {
     public DrawerLayout drawerLayout;
 
     private Button navButton;
+
+    private  SimpleDateFormat sdf = new SimpleDateFormat("MM月dd日 ");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -222,7 +226,7 @@ public class WeatherActivity extends AppCompatActivity {
         String weatherInfo = weather.now.more.info;
 
         titleCity.setText(cityName);
-        titleUpdateTime.setText(updateTime);
+        titleUpdateTime.setText(sdf.format(new Date())+updateTime);
         degreeText.setText(degree);
         weatherInfoText.setText(weatherInfo);
         forecastLayout.removeAllViews();
